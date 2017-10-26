@@ -46,8 +46,17 @@ exports.isUrlInList = function(url, callback) {
 };
 
 exports.addUrlToList = function(url, callback) {
-  fs.writeFile(exports.paths.list, url);
-  callback();
+  // fs.readFile(exports.paths.list, function(err, data) {
+  //   var dataArray = String(data).split('\n');
+  //   dataArray.push(url);
+  //   var file = dataArray.join('\n');
+  //   fs.writeFile(exports.paths.list, file);
+  // });
+
+  fs.appendFile(exports.paths.list, url);
+  if (callback !== undefined) {
+    callback();
+  }
 };
 
 exports.isUrlArchived = function(url, callback) {
