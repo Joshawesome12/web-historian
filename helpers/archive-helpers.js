@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
+var qs = require('qs');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -26,16 +27,43 @@ exports.initialize = function(pathsObj) {
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(callback) {
+  fs.readFile(exports.paths.list,  function(err, data) {
+    var dataString = String(data);
+    dataString = dataString.split('\n');
+    callback(dataString);
+  });
 };
 
 exports.isUrlInList = function(url, callback) {
+  fs.readFile(exports.paths.list, function(err, data) {
+    var dataString = String(data).split('\n');
+    if (dataString.indexOf(url) === -1) {
+      callback(false);
+    } else {
+      callback(true);
+    }
+  });
 };
 
 exports.addUrlToList = function(url, callback) {
+  fs.writeFile(exports.paths.list, url);
+  callback();
 };
 
 exports.isUrlArchived = function(url, callback) {
+  var arr = fs.readdirSync(exports.paths.archivedSites);
+  if (arr.indexOf(url) === -1) {
+    callback(false);
+  } else {
+    callback(true);
+  }
 };
 
 exports.downloadUrls = function(urls) {
+  fs.readdir(exports.paths.archivedSites);
+
+
+
+
+
 };
