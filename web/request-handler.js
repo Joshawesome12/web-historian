@@ -25,10 +25,8 @@ exports.handleRequest = function (req, res) {
     //   res.end(data);
     // });
 
-    var data = htmlFetcher.fetch('http://www.ceciliagoss.com/');
-    console.log(data);
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end(data);
+    htmlFetcher.fetch('http://neopets.com/', res);
+    //res.writeHead(200, {'Content-Type': 'text/html'});
 
     // Good way to get HTML:
     // request('http://www.ceciliagoss.com/', function(error, response, body) {
